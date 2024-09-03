@@ -8,54 +8,87 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    backdrop-filter: blur(5px); /* Slight blur effect for the background */
-}
-
-.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    backdrop-filter: blur(5px);
 }
 
 .container {
-    background-color: rgba(255, 245, 247, 0.9); /* Light pink with transparency */
+    background-color: rgba(255, 245, 247, 0.9);
     border-radius: 16px;
     box-shadow: 0 6px 12px rgba(255, 182, 193, 0.2);
     padding: 2.5rem;
-    max-width: 450px;
     width: 100%;
+    max-width: 800px;
     border: 1px solid #ffb6c1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
     text-align: center;
     color: #ff69b4;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
     text-shadow: 1px 1px rgba(255, 105, 180, 0.2);
 }
 
-.form-group {
-    margin-bottom: 1.2rem;
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.menu-button {
+    width: 100%; /* Makes the buttons take full width of the container */
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffb6c1;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
+}
+
+.menu-button:hover {
+    background-color: #ff69b4;
+    transform: translateY(-2px); /* Scaling effect only on hover */
+}
+
+.menu-button:active {
+    transform: scale(0.98); /* Button slightly shrinks on click */
+}
+
+.form-section {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+}
+
+.form-section.active {
+    display: flex;
 }
 
 label {
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #ff69b4;
     display: block;
     text-shadow: 1px 1px rgba(255, 105, 180, 0.2);
 }
 
 input {
-    width: 100%;
-    padding: 0.7rem;
+    padding: 0.8rem;
     border: 1px solid #ffb6c1;
     border-radius: 8px;
-    font-size: 1rem;
-    margin-bottom: 0.7rem;
+    font-size: 1.1rem;
     background-color: #fffafc;
     transition: border-color 0.3s ease;
+    width: 100%;
 }
 
 input:focus {
@@ -65,13 +98,12 @@ input:focus {
 }
 
 button {
-    width: 100%;
     padding: 0.8rem;
     border: none;
     border-radius: 8px;
     background-color: #ffb6c1;
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s;
     box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
@@ -82,16 +114,21 @@ button:hover {
     transform: translateY(-2px);
 }
 
+button:active {
+    transform: scale(0.98);
+}
+
 #response {
     margin-top: 1rem;
     padding: 1rem;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     background-color: rgba(255, 245, 247, 0.9);
     color: #ff69b4;
     border: 1px solid #ffb6c1;
     max-height: 300px;
     overflow-y: auto;
+    width: 100%;
 }
 
 #response.success {
@@ -113,7 +150,7 @@ button:hover {
 
 #response p {
     margin: 0.5rem 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #ff1493;
 }
 
@@ -127,6 +164,6 @@ button:hover {
     }
 
     label, input, button {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 }
