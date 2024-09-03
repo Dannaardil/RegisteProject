@@ -1,121 +1,132 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: url('https://static.vecteezy.com/system/resources/thumbnails/003/423/841/small/cute-cat-cartoon-doodle-seamless-pattern-background-wallpaper-vector.jpg') no-repeat center center fixed;
+    background-size: cover;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    backdrop-filter: blur(5px); /* Slight blur effect for the background */
 }
 
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .container {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    max-width: 400px;
+    background-color: rgba(255, 245, 247, 0.9); /* Light pink with transparency */
+    border-radius: 16px;
+    box-shadow: 0 6px 12px rgba(255, 182, 193, 0.2);
+    padding: 2.5rem;
+    max-width: 450px;
     width: 100%;
+    border: 1px solid #ffb6c1;
 }
 
 h1 {
     text-align: center;
-    color: #333;
-    margin-bottom: 2rem;
+    color: #ff69b4;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px rgba(255, 105, 180, 0.2);
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 label {
     margin-bottom: 0.5rem;
     font-size: 1rem;
-    color: #555;
+    color: #ff69b4;
     display: block;
+    text-shadow: 1px 1px rgba(255, 105, 180, 0.2);
 }
 
 input {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 0.7rem;
+    border: 1px solid #ffb6c1;
+    border-radius: 8px;
     font-size: 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.7rem;
+    background-color: #fffafc;
     transition: border-color 0.3s ease;
 }
 
 input:focus {
-    border-color: #007bff;
+    border-color: #ff69b4;
     outline: none;
+    box-shadow: 0 0 5px #ffb6c1;
 }
 
 button {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.8rem;
     border: none;
-    border-radius: 4px;
-    background-color: #007bff;
+    border-radius: 8px;
+    background-color: #ffb6c1;
     color: #ffffff;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #ff69b4;
+    transform: translateY(-2px);
 }
 
 #response {
     margin-top: 1rem;
     padding: 1rem;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 1rem;
-    background-color: #f7f9fc;
-    color: #333;
-    border: 1px solid #ddd;
+    background-color: rgba(255, 245, 247, 0.9);
+    color: #ff69b4;
+    border: 1px solid #ffb6c1;
     max-height: 300px;
     overflow-y: auto;
 }
 
 #response.success {
-    background-color: #d4edda;
+    background-color: rgba(209, 255, 196, 0.9);
     color: #155724;
     border-color: #c3e6cb;
 }
 
 #response.error {
-    background-color: #f8d7da;
+    background-color: rgba(255, 193, 193, 0.9);
     color: #721c24;
     border-color: #f5c6cb;
 }
 
 #response h2 {
     margin-bottom: 1rem;
+    color: #ff69b4;
 }
 
 #response p {
     margin: 0.5rem 0;
     font-size: 1rem;
-    color: #555;
+    color: #ff1493;
 }
 
 #response p strong {
-    color: #333;
+    color: #ff69b4;
 }
 
 @media (max-width: 600px) {
     .container {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 
     label, input, button {
-        font-size: 0.875rem;
+        font-size: 0.9rem;
     }
 }
