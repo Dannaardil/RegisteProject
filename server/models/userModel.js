@@ -9,6 +9,11 @@ const sequelize = new Sequelize('register', 'danna', 'Danna1234.', {
 
 // Define Sequelize User model (for MySQL)
 const UserMySQL = sequelize.define('User', {
+    id_mongo:{
+        type: DataTypes.STRING,
+        allowNull: false
+
+    }, 
   
     name: {
         type: DataTypes.STRING,

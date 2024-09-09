@@ -5,7 +5,7 @@ const { createUser, getUser, updateUser, deleteUser, createUserSql, updateUserSq
 
 // Crear un usuario
 router.post('/create', userValidationRules(), validate, createUser);
-router.post('/createSql', userValidationRules(), validate, createUserSql);
+// router.post('/createSql', userValidationRules(), validate, createUser);
 
 // Obtener un usuario por ID
 router.get('/:id', getUser);

@@ -44,34 +44,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = Object.fromEntries(formData.entries());
         try{
         
-        const [sqliteResponse, mongoResponse] = await Promise.all([
-            fetch(`/api/users/createSql`, {
+            const mongoResponse = await fetch('/api/users/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
-            }),
-            fetch(`/api/users/create`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-        ]);
-        const resultsql = await sqliteResponse.json();
-        const resultmongo = await mongoResponse.json();
+            });
             
+
+        const {ok , user } = await mongoResponse.json();
+             console.log(mongoResponse);
+
+            if (ok) {
+                mostrarDatosUsuario(user);
+                console.log(ok)
             
-            if (resultmongo.ok) {
-                mostrarDatosUsuario(resultmongo.user);
-            } else {
-                mostrarError(resultmongo.message || 'Ocurrió un error');
+                } else {
+
+                mostrarError(ok || 'Ocurrió un error');
             }
             
         } catch (error) {
             mostrarError('Se produjo un error inesperado. Por favor, inténtalo de nuevo.');
+            console.error(error);
+
         }
     });
 
@@ -199,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         responseDiv.style.display = 'block';
         responseDiv.innerHTML = `
             <h2>Datos del Usuario</h2>
-            <p><strong>ID:</strong> ${usuario._id || 'No disponible'}</p>
+            <p><strong>ID:</strong> ${usuario._id|| 'No disponible'}</p>
             <p><strong>Nombre:</strong> ${usuario.name || 'No disponible'}</p>
             <p><strong>Apellido:</strong> ${usuario.surname || 'No disponible'}</p>
             <p><strong>Edad:</strong> ${usuario.age || 'No disponible'}</p>
