@@ -20,9 +20,10 @@
         </div>
 
         <!-- Formularios -->
+      
         <div id="createForm" class="form-section" style="display: none;">
-            <h2>Crear Usuario</h2>
-            <form id="createUserForm">
+            <h2>Crear Usuario(sql)-- </h2>
+            <form id="createUserFormSql">
                 <div class="form-group">
                     <label for="name">Nombre:</label>
                     <input type="text" id="name" name="name" required>
@@ -80,6 +81,33 @@
                 <button type="submit">Actualizar Usuario</button>
             </form>
         </div>
+        <div id="updateForm" class="form-section" style="display: none;">
+            <h2>Actualizar Usuario (sql) </h2>
+            <form id="updateUserFormSql">
+                <div class="form-group">
+                    <label for="updateId">ID del Usuario:</label>
+                    <input type="text" id="updateId" required>
+                </div>
+                <div class="form-group">
+                    <label for="updateName">Nombre:</label>
+                    <input type="text" id="updateName">
+                </div>
+                <div class="form-group">
+                    <label for="updateSurname">Apellido:</label>
+                    <input type="text" id="updateSurname">
+                </div>
+                <div class="form-group">
+                    <label for="updateAge">Edad:</label>
+                    <input type="number" id="updateAge">
+                </div>
+                <div class="form-group">
+                    <label for="updateEmail">Email:</label>
+                    <input type="email" id="updateEmail">
+                </div>
+                <button type="submit">Actualizar Usuario</button>
+            </form>
+        </div>
+
 
         <div id="deleteForm" class="form-section" style="display: none;">
             <h2>Eliminar Usuario</h2>

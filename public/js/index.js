@@ -36,28 +36,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Manejar la creación de usuario
-    document.getElementById('createUserForm').addEventListener('submit', async (event) => {
+
+    document.getElementById('createUserFormSql').addEventListener('submit', async (event) => {
         event.preventDefault();
         
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData.entries());
+        try{
         
-        try {
-            const response = await fetch('/api/users/create', {
+        const [sqliteResponse, mongoResponse] = await Promise.all([
+            fetch(`/api/users/createSql`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
-            });
+            }),
+            fetch(`/api/users/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+        ]);
+        const resultsql = await sqliteResponse.json();
+        const resultmongo = await mongoResponse.json();
             
-            const result = await response.json();
             
-            if (response.ok) {
-                mostrarDatosUsuario(result.user);
+            if (resultmongo.ok) {
+                mostrarDatosUsuario(resultmongo.user);
             } else {
-                mostrarError(result.message || 'Ocurrió un error');
+                mostrarError(resultmongo.message || 'Ocurrió un error');
             }
+            
         } catch (error) {
             mostrarError('Se produjo un error inesperado. Por favor, inténtalo de nuevo.');
         }
@@ -96,7 +108,48 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         try {
-            const response = await fetch(`/api/users/${userId}`, {
+            const [sqliteResponse, mongoResponse] = await Promise.all([
+                fetch(`/api/users/sql/${userId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }),
+                fetch(`/api/users/${userId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+            ]);
+            const resultsql = await sqliteResponse.json();
+            const resultmongo = await mongoResponse.json();
+                
+            
+            if (resultmongo.ok) {
+                mostrarDatosUsuario(resultmongo.user);
+            } else {
+                mostrarError(resultmongo.message || 'Ocurrió un error');
+            }
+        } catch (error) {
+            mostrarError('Se produjo un error inesperado. Por favor, inténtalo de nuevo.');
+        }
+    });
+    document.getElementById('updateUserFormSql').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+        const userId = document.getElementById('updateId').value;
+        const updatedData = {
+            name: document.getElementById('updateName').value,
+            surname: document.getElementById('updateSurname').value,
+            age: document.getElementById('updateAge').value,
+            email: document.getElementById('updateEmail').value
+        };
+        
+        try {
+            const response = await fetch(`/api/users/sql/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
