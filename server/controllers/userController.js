@@ -47,28 +47,46 @@ exports.getUser = async (req, res) => {
     }
 };
 
+
+
 exports.updateUser = async (req, res) => {
+    const userId = req.params.id;
+    const updateData = req.body;
+
     try {
-        const user = await UserMongoDB.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-        if (!user) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
+        // Update MongoDB
+        const mongoUpdate = UserMongoDB.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true }).exec();
+        
+        // Update MySQL
+        const mysqlUpdate = UserMySQL.update(
+            {
+                name: updateData.name,
+                surname: updateData.surname,
+                age: updateData.age,
+                email: updateData.email
+            },
+            {
+                where: { id_mongo: userId }
+            }
+        );
+
+        const [mongoUser, mysqlResult] = await Promise.all([mongoUpdate, mysqlUpdate]);
+
+        if (!mongoUser) {
+            return res.status(404).json({ message: 'Usuario no encontrado en MongoDB' });
         }
-        res.status(200).json({ message: 'Usuario actualizado con éxito', user });
+
+        if (mysqlResult[0] === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado en MySQL' });
+        }
+
+        res.status(200).json({ message: 'Usuario actualizado con éxito en ambas bases de datos', user: mongoUser });
     } catch (error) {
         res.status(500).json({ message: 'Error al actualizar el usuario', error });
     }
 };
-exports.updateUserSql= async (req, res) => {
-    try {
-        const user = await UserMySQL.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-        if (!user) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
-        }
-        res.status(200).json({ message: 'Usuario actualizado con éxito', user });
-    } catch (error) {
-        res.status(500).json({ message: 'Error al actualizar el usuario', error });
-    }
-};
+
+
 
 exports.deleteUser = async (req, res) => {
     try {

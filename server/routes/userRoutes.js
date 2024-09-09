@@ -12,7 +12,6 @@ router.get('/:id', getUser);
 
 // Actualizar un usuario por ID
 router.put('/:id', userValidationRules(), validate, updateUser);
-router.put('/sql/:id', userValidationRules(), validate, updateUserSql);
 
 // Eliminar un usuario por ID
 router.delete('/:id', deleteUser);

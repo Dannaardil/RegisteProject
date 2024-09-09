@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Manejar la actualización de usuario
     document.getElementById('updateUserForm').addEventListener('submit', async (event) => {
         event.preventDefault();
-        
+    
         const userId = document.getElementById('updateId').value;
         const updatedData = {
             name: document.getElementById('updateName').value,
@@ -103,68 +103,62 @@ document.addEventListener('DOMContentLoaded', () => {
             age: document.getElementById('updateAge').value,
             email: document.getElementById('updateEmail').value
         };
-        
+         console.log(updatedData);
         try {
-            const [sqliteResponse, mongoResponse] = await Promise.all([
-                fetch(`/api/users/sql/${userId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                }),
-                fetch(`/api/users/${userId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-            ]);
-            const resultsql = await sqliteResponse.json();
-            const resultmongo = await mongoResponse.json();
-                
-            
-            if (resultmongo.ok) {
-                mostrarDatosUsuario(resultmongo.user);
-            } else {
-                mostrarError(resultmongo.message || 'Ocurrió un error');
-            }
-        } catch (error) {
-            mostrarError('Se produjo un error inesperado. Por favor, inténtalo de nuevo.');
-        }
-    });
-    document.getElementById('updateUserFormSql').addEventListener('submit', async (event) => {
-        event.preventDefault();
-        
-        const userId = document.getElementById('updateId').value;
-        const updatedData = {
-            name: document.getElementById('updateName').value,
-            surname: document.getElementById('updateSurname').value,
-            age: document.getElementById('updateAge').value,
-            email: document.getElementById('updateEmail').value
-        };
-        
-        try {
-            const response = await fetch(`/api/users/sql/${userId}`, {
+            const response = await fetch(`/api/users/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatedData)
             });
-            
+    
             const result = await response.json();
-            
+    
             if (response.ok) {
                 mostrarDatosUsuario(result.user);
             } else {
                 mostrarError(result.message || 'Ocurrió un error');
+                console.log(result);
             }
         } catch (error) {
             mostrarError('Se produjo un error inesperado. Por favor, inténtalo de nuevo.');
+            console.error(error);
         }
     });
+    
+    
+    // document.getElementById('updateUserFormSql').addEventListener('submit', async (event) => {
+    //     event.preventDefault();
+        
+    //     const userId = document.getElementById('updateId').value;
+    //     const updatedData = {
+    //         name: document.getElementById('updateName').value,
+    //         surname: document.getElementById('updateSurname').value,
+    //         age: document.getElementById('updateAge').value,
+    //         email: document.getElementById('updateEmail').value
+    //     };
+        
+    //     try {
+    //         const response = await fetch(`/api/users/sql/${userId}`, {
+    //             method: 'PUT',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(updatedData)
+    //         });
+            
+    //         const result = await response.json();
+            
+    //         if (response.ok) {
+    //             mostrarDatosUsuario(result.user);
+    //         } else {
+    //             mostrarError(result.message || 'Ocurrió un error');
+    //         }
+    //     } catch (error) {
+    //         mostrarError('Se produjo un error inesperado. Por favor, inténtalo de nuevo.');
+    //     }
+    // });
 
     // Manejar la eliminación de usuario
     document.getElementById('deleteUserForm').addEventListener('submit', async (event) => {
