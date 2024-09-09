@@ -1,10 +1,30 @@
-const mongoose = require('mongoose');
-
-const userSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    surname: { type: String, required: true },
-    age: { type: Number, required: true },
-    email: { type: String, required: true, unique: true }
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('register', 'danna', 'Danna1234.', {
+    host: 'localhost',
+    dialect: 'mysql'
 });
 
-module.exports = mongoose.model('User', userSchema, "Users-1");
+const User = sequelize.define('User', {
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    surname: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    }
+}, {
+    tableName: 'users', // Ensure this matches your actual table name
+    timestamps: false // Set to true if you want Sequelize to handle createdAt and updatedAt fields
+});
+
+module.exports = User;

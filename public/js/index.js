@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         responseDiv.style.display = 'block';
         responseDiv.innerHTML = `
             <h2>Datos del Usuario</h2>
-            <p><strong>ID:</strong> ${usuario._id || 'No disponible'}</p>
+            <p><strong>ID:</strong> ${usuario.id || 'No disponible'}</p>
             <p><strong>Nombre:</strong> ${usuario.name || 'No disponible'}</p>
             <p><strong>Apellido:</strong> ${usuario.surname || 'No disponible'}</p>
             <p><strong>Edad:</strong> ${usuario.age || 'No disponible'}</p>
